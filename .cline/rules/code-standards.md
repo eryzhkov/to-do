@@ -30,7 +30,7 @@
 
 ## Тестирование
 
-- Имена тестовых методов: `methodName_condition_expectedResult` (например, `findById_whenUserExists_returnsUser`).
+- Имена тестовых методов: `should[DoSomething]_when[GivenCondition]` (например, `shouldCreateTask_whenRequestIsValid`).
 - Использовать `@DisplayName` на русском для читаемости отчётов.
 - Для assertions использовать AssertJ: `assertThat(actual).isEqualTo(expected)`.
 
