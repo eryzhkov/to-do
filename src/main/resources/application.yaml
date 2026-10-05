@@ -1,3 +1,19 @@
 spring:
   application:
     name: todo-list
+  datasource:
+    url: jdbc:postgresql://localhost:5432/todo
+    username: todo
+    password: todo
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        default_schema: todo
+        jdbc:
+          time_zone: UTC
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml

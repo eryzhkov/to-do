@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="20261005-2040-01" author="cline">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*) FROM information_schema.schemata WHERE schema_name = 'todo'
+            </sqlCheck>
+        </preConditions>
+        <comment>Создание схемы todo для объектов приложения</comment>
+        <!-- Liquibase 5.x больше не содержит тег createSchema, поэтому используется SQL -->
+        <sql>CREATE SCHEMA IF NOT EXISTS todo</sql>
+    </changeSet>
+
+    <changeSet id="20261005-2040-02" author="cline">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists schemaName="todo" tableName="tasks"/>
+            </not>
+        </preConditions>
+        <comment>Создание таблицы todo.tasks для хранения задач</comment>
+        <createTable schemaName="todo" tableName="tasks" remarks="Задачи пользователей">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_tasks"/>
+            </column>
+            <column name="title" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="text"/>
+            <column name="status" type="varchar(255)" defaultValue="PLANNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="priority" type="varchar(255)" defaultValue="MEDIUM">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp with time zone">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="timestamp with time zone"/>
+            <column name="completed_at" type="timestamp with time zone"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

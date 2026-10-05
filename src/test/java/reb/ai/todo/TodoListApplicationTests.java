@@ -1,15 +1,18 @@
 package reb.ai.todo;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
 
-@Import(TestcontainersConfiguration.class)
-@SpringBootTest
-class TodoListApplicationTests {
+/**
+ * Smoke-тест: проверяет, что Spring-контекст приложения поднимается.
+ *
+ * <p>Наследуется от {@link BaseIntegrationTest}, поэтому использует общий контейнер PostgreSQL.
+ */
+class TodoListApplicationTests extends BaseIntegrationTest {
 
 	@Test
-	void contextLoads() {
+	@DisplayName("Контекст приложения загружается без ошибок")
+	void shouldLoadContext_whenApplicationStarts() {
 	}
 
 }
